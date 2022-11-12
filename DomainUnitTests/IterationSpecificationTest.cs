@@ -29,5 +29,13 @@ namespace DomainUnitTests
                 Assert.Fail("Expected an ArgumentException to be thrown");
             }
         }
+
+        [Test]
+        public void ValueReturnsTheExpectedResult()
+        {
+            const int expectedIterations = 5;
+            var iterationSpecification = new IterationSpecification(expectedIterations);
+            Assert.AreEqual(expectedIterations, iterationSpecification.Value());
+        }
     }
 }

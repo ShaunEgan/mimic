@@ -10,7 +10,7 @@ namespace Domain
         /// <summary>
         /// The minimum number of iterations the simulation should run.
         /// </summary>
-        private readonly int _iterations;
+        private readonly uint _iterations;
 
         /// <summary>
         /// Specify the number of iterations required of the simulation.
@@ -26,16 +26,16 @@ namespace Domain
                 throw new ArgumentException("Iterations must be a positive integer higher than 0");
             }
 
-            _iterations = iterations;
+            _iterations = (uint)iterations;
         }
 
         /// <summary>
         /// Get the minimum number of iterations that the simulation should run.
         /// </summary>
         /// <returns></returns>
-        public int GetIterations()
+        public int Value()
         {
-            return _iterations;
+            return (int)_iterations;
         }
     }
 }

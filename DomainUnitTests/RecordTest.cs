@@ -16,5 +16,13 @@ namespace DomainUnitTests
         {
             var _ = new Record(10);
         }
+
+        [Test]
+        public void ValueReturnsTheExpectedResult()
+        {
+            const int expectedCompletedTasks = 5;
+            var record = new Record(expectedCompletedTasks);
+            Assert.AreEqual(expectedCompletedTasks, record.Value());
+        }
     }
 }

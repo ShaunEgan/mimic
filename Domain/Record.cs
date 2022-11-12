@@ -25,7 +25,7 @@ namespace Domain
         /// Get the number of tasks completed
         /// </summary>
         /// <returns>The number of completed tasks</returns>
-        public uint GetCompletedTasks()
+        public uint Value()
         {
             return _completedTasks;
         }
