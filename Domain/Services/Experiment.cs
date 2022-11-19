@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Domain.ValueObjects;
 
-namespace Domain
+namespace Domain.Services
 {
     public interface IBuilder
     {
@@ -30,7 +31,7 @@ namespace Domain
 
         public IBuilder Iterations(int iterations)
         {
-            _experiment.IterationSpecification = new IterationSpecification(iterations);
+            _experiment.Simulations = new Simulations(iterations);
             return this;
         }
 
@@ -42,7 +43,7 @@ namespace Domain
 
         public IBuilder Backlog(int items)
         {
-            _experiment.Backlog = new Backlog(items);
+            _experiment.TasksToComplete = new TasksToComplete(items);
             return this;
         }
 
@@ -60,15 +61,15 @@ namespace Domain
     /// </summary>
     public class Experiment
     {
-        internal IterationSpecification IterationSpecification;
+        internal Simulations Simulations;
         internal History History;
-        internal Backlog Backlog;
+        internal TasksToComplete TasksToComplete;
 
         public ExperimentResults Run()
         {
             var results = new ExperimentResults();
 
-            for (var i = 0; i < IterationSpecification.Value(); i++)
+            for (var i = 0; i < Simulations.Value(); i++)
             {
                 results.AddSimulationResult(Simulate());
             }
@@ -76,24 +77,24 @@ namespace Domain
             return results;
         }
 
-        private NumberOfCycles Simulate()
+        private CyclesUsed Simulate()
         {
             var cycles = 0;
-            
-            var samples = History.GetRecords().ToArray();
-            var remaining = Backlog.Value();
+
+            var samples = History.Value().ToArray();
+            var remaining = TasksToComplete.Value();
 
             while (remaining > 0)
             {
                 cycles++;
-                
+
                 var random = new Random();
                 var index = random.Next(0, samples.Length);
                 var sample = samples[index].Value();
                 remaining -= (int)sample;
             }
 
-            return new NumberOfCycles(cycles);
+            return new CyclesUsed(cycles);
         }
     }
 }

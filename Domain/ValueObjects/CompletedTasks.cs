@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace Domain
+﻿namespace Domain.ValueObjects
 {
     /// <summary>
     /// Represents the number of tasks completed in a given cycle
     /// </summary>
-    public class Record
+    public class CompletedTasks : IValueObject<int>
     {
         /// <summary>
         /// The number of tasks completed
@@ -13,21 +11,21 @@ namespace Domain
         private readonly uint _completedTasks;
 
         /// <summary>
-        /// Create an instance of Record, which represents the number of tasks completed in a given cycle
+        /// Create an instance of CompletedTasks, which represents the number of tasks completed in a given cycle
         /// </summary>
         /// <param name="completedTasks">The number of tasks completed in the given cycle</param>
-        public Record(uint completedTasks)
+        public CompletedTasks(int completedTasks)
         {
-            _completedTasks = completedTasks;
+            _completedTasks = (uint)completedTasks;
         }
 
         /// <summary>
         /// Get the number of tasks completed
         /// </summary>
         /// <returns>The number of completed tasks</returns>
-        public uint Value()
+        public int Value()
         {
-            return _completedTasks;
+            return (int)_completedTasks;
         }
     }
 }

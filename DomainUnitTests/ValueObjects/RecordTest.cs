@@ -1,27 +1,27 @@
-﻿using Domain;
+﻿using Domain.ValueObjects;
 using NUnit.Framework;
 
-namespace DomainUnitTests
+namespace DomainUnitTests.ValueObjects
 {
     public class RecordTest
     {
         [Test]
         public void TestZeroCompletedTasks()
         {
-            var _ = new Record(0);
+            var _ = new CompletedTasks(0);
         }
 
         [Test]
         public void TestValidNumberOfCompletedTasks()
         {
-            var _ = new Record(10);
+            var _ = new CompletedTasks(10);
         }
 
         [Test]
         public void ValueReturnsTheExpectedResult()
         {
             const int expectedCompletedTasks = 5;
-            var record = new Record(expectedCompletedTasks);
+            var record = new CompletedTasks(expectedCompletedTasks);
             Assert.AreEqual(expectedCompletedTasks, record.Value());
         }
     }

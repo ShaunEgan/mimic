@@ -1,15 +1,15 @@
 ﻿using System;
-using Domain;
+using Domain.ValueObjects;
 using NUnit.Framework;
 
-namespace DomainUnitTests
+namespace DomainUnitTests.ValueObjects
 {
     public class IterationSpecificationTest
     {
         [Test]
         public void TestValidIterations()
         {
-            var _ = new IterationSpecification(1);
+            var _ = new Simulations(1);
         }
 
         [Test]
@@ -17,14 +17,14 @@ namespace DomainUnitTests
         {
             try
             {
-                var _ = new IterationSpecification(0);
+                var _ = new Simulations(0);
                 Assert.Fail("Expected an Exception to be thrown");
             }
-            catch (ArgumentException _)
+            catch (ArgumentException)
             {
                 Assert.Pass();
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 Assert.Fail("Expected an ArgumentException to be thrown");
             }
@@ -34,7 +34,7 @@ namespace DomainUnitTests
         public void ValueReturnsTheExpectedResult()
         {
             const int expectedIterations = 5;
-            var iterationSpecification = new IterationSpecification(expectedIterations);
+            var iterationSpecification = new Simulations(expectedIterations);
             Assert.AreEqual(expectedIterations, iterationSpecification.Value());
         }
     }

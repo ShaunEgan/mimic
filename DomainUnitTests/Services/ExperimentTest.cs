@@ -1,32 +1,31 @@
 ﻿using System.Linq;
-using Domain;
+using Domain.Services;
+using Domain.ValueObjects;
 using NUnit.Framework;
 
-namespace DomainUnitTests
+namespace DomainUnitTests.Services
 {
     public class ExperimentTest
     {
-        private readonly int _iterations = 10000;
-        
+        private const int Iterations = 10000;
+
         [Test]
         public void TestResultSizeMatchesIterationSize()
         {
-            const int iterations = 10;
-            
             var history = new History();
-            history.AddRecord(new Record(1));
+            history.AddTasksCompletedInACycle(new CompletedTasks(1));
 
             var experiment = new ExperimentBuilder()
                 .History(history)
-                .Iterations(_iterations)
+                .Iterations(Iterations)
                 .Backlog(1)
                 .GetExperiment();
 
             var result = experiment.Run()
-                .GetExperimentResults()
+                .Value()
                 .ToList();
-            
-            Assert.AreEqual(_iterations, result.Count);
+
+            Assert.AreEqual(Iterations, result.Count);
         }
     }
 }
