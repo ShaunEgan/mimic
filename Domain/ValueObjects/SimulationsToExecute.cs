@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain.ValueObjects.Abstractions;
+using Domain.Abstractions;
 
 namespace Domain.ValueObjects
 {

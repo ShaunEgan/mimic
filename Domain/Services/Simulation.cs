@@ -1,36 +1,29 @@
-﻿using System;
-using System.Linq;
+﻿using Domain.Abstractions;
 using Domain.ValueObjects;
-using Domain.ValueObjects.History;
 
 namespace Domain.Services
 {
     public class Simulation
     {
-        private readonly History _history;
         private readonly TasksToComplete _tasksToComplete;
+        private readonly ISampler<CompletedTasks> _sampler;
 
-        public Simulation(History history, TasksToComplete tasksToComplete)
+        public Simulation(TasksToComplete tasksToComplete, ISampler<CompletedTasks> sampler)
         {
-            _history = history;
             _tasksToComplete = tasksToComplete;
+            _sampler = sampler;
         }
 
         public CyclesUsed Execute()
         {
             var cycles = 0;
-
-            var samples = _history.Value().ToArray();
             var remaining = _tasksToComplete.Value();
 
             while (remaining > 0)
             {
                 cycles++;
 
-                var random = new Random();
-                var index = random.Next(0, samples.Length);
-                var sample = samples[index].Value();
-                
+                var sample = _sampler.NextSample().Value();
                 remaining -= (int)sample;
             }
 

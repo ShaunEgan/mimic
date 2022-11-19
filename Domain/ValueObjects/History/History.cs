@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Domain.ValueObjects.Abstractions;
+using Domain.Abstractions;
 
 namespace Domain.ValueObjects.History
 {

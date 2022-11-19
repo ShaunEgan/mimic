@@ -16,8 +16,10 @@ namespace DomainUnitTests.Services
             var history = new History();
             history.AddTasksCompletedInACycle(new CompletedTasks(1));
 
+            var sampler = new RandomHistoricalSampler(history);
+
             var experiment = new ExperimentBuilder()
-                .History(history)
+                .Sampler(sampler)
                 .SimulationsToExecute(Iterations)
                 .TasksToComplete(1)
                 .GetExperiment();

@@ -1,6 +1,6 @@
-﻿using Domain.ValueObjects;
+﻿using Domain.Abstractions;
+using Domain.ValueObjects;
 using Domain.ValueObjects.ExperimentResults;
-using Domain.ValueObjects.History;
 
 namespace Domain.Services
 {
@@ -8,7 +8,7 @@ namespace Domain.Services
     {
         IBuilder SimulationsToExecute(int simulationsToExecute);
 
-        IBuilder History(History history);
+        IBuilder Sampler(ISampler<CompletedTasks> sampler);
 
         IBuilder TasksToComplete(int tasksToComplete);
 
@@ -35,9 +35,9 @@ namespace Domain.Services
             return this;
         }
 
-        public IBuilder History(History history)
+        public IBuilder Sampler(ISampler<CompletedTasks> sampler)
         {
-            _experiment.History = history;
+            _experiment.Sampler = sampler;
             return this;
         }
 
@@ -61,8 +61,8 @@ namespace Domain.Services
     public class Experiment
     {
         internal SimulationsToExecute SimulationsToExecute;
-        internal History History;
         internal TasksToComplete TasksToComplete;
+        internal ISampler<CompletedTasks> Sampler;
 
         public ExperimentResults Run()
         {
@@ -70,7 +70,7 @@ namespace Domain.Services
 
             for (var i = 0; i < SimulationsToExecute.Value(); i++)
             {
-                var simulation = new Simulation(History, TasksToComplete);
+                var simulation = new Simulation(TasksToComplete, Sampler);
                 var cyclesUsed = simulation.Execute();
                 results.AddSimulationResult(cyclesUsed);
             }

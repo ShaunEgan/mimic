@@ -1,4 +1,4 @@
-﻿namespace Domain.ValueObjects.Abstractions
+﻿namespace Domain.Abstractions
 {
     /// <summary>
     /// IValueObject concretions wrap simple types with domain rules. It is possible to retrieve the values from these
