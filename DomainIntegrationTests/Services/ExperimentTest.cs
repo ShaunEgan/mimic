@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Domain.Abstractions;
 using Domain.Services;
 using Domain.ValueObjects;
 using Domain.ValueObjects.History;
@@ -8,27 +11,38 @@ namespace DomainIntegrationTests.Services
 {
     public class ExperimentTest
     {
-        private const int Iterations = 10000;
+        private const int SimulationsToExecute = 1000;
+        private const int TasksToComplete = 15;
         
-        [Test]
-        public void TestResultSizeMatchesIterationSize()
+        private History _history;
+        private ISampler<CompletedTasks> _sampler;
+        private Experiment _experiment;
+        private IEnumerable<CyclesUsed> _result;
+
+        [SetUp]
+        public void ExperimentOutlierTestSetup()
         {
-            var history = new History();
-            history.AddTasksCompletedInACycle(new CompletedTasks(1));
+            _history = new History();
+            _history.AddTasksCompletedInACycle(new CompletedTasks(1));
+            _history.AddTasksCompletedInACycle(new CompletedTasks(2));
+            _history.AddTasksCompletedInACycle(new CompletedTasks(3));
 
-            var sampler = new RandomHistoricalSampler(history);
-
-            var experiment = new ExperimentBuilder()
-                .Sampler(sampler)
-                .SimulationsToExecute(Iterations)
-                .TasksToComplete(1)
+            _sampler = new RandomHistoricalSampler(_history);
+            
+            _experiment = new ExperimentBuilder()
+                .Sampler(_sampler)
+                .SimulationsToExecute(SimulationsToExecute)
+                .TasksToComplete(TasksToComplete)
                 .GetExperiment();
 
-            var result = experiment.Run()
-                .Value()
-                .ToList();
+            _result = _experiment.Run()
+                .Value();
+        }
 
-            Assert.AreEqual(Iterations, result.Count);
+        [Test]
+        public void ThereIsAResultForEachCycle()
+        {
+            Assert.That(_result, Has.Count.EqualTo(SimulationsToExecute));
         }
     }
 }

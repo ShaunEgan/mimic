@@ -30,7 +30,7 @@ namespace Domain.ValueObjects.ExperimentResults
         /// <returns></returns>
         public IEnumerable<CyclesUsed> Value()
         {
-            return _experimentResults.OrderBy(c => c.Value());
+            return _experimentResults.OrderBy(c => c.Value()).ToList();
         }
     }
 }
