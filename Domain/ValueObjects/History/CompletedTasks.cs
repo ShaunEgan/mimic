@@ -1,4 +1,6 @@
-﻿namespace Domain.ValueObjects
+﻿using Domain.ValueObjects.Abstractions;
+
+namespace Domain.ValueObjects
 {
     /// <summary>
     /// Represents the number of tasks completed in a given cycle

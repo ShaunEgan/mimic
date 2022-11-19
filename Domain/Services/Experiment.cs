@@ -33,7 +33,7 @@ namespace Domain.Services
 
         public IBuilder Iterations(int iterations)
         {
-            _experiment.Simulations = new Simulations(iterations);
+            _experiment.SimulationsToExecute = new SimulationsToExecute(iterations);
             return this;
         }
 
@@ -63,7 +63,7 @@ namespace Domain.Services
     /// </summary>
     public class Experiment
     {
-        internal Simulations Simulations;
+        internal SimulationsToExecute SimulationsToExecute;
         internal History History;
         internal TasksToComplete TasksToComplete;
 
@@ -71,7 +71,7 @@ namespace Domain.Services
         {
             var results = new ExperimentResults();
 
-            for (var i = 0; i < Simulations.Value(); i++)
+            for (var i = 0; i < SimulationsToExecute.Value(); i++)
             {
                 results.AddSimulationResult(Simulate());
             }

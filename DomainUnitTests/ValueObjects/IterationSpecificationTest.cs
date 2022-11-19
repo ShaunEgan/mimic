@@ -9,7 +9,7 @@ namespace DomainUnitTests.ValueObjects
         [Test]
         public void TestValidIterations()
         {
-            var _ = new Simulations(1);
+            var _ = new SimulationsToExecute(1);
         }
 
         [Test]
@@ -17,7 +17,7 @@ namespace DomainUnitTests.ValueObjects
         {
             try
             {
-                var _ = new Simulations(0);
+                var _ = new SimulationsToExecute(0);
                 Assert.Fail("Expected an Exception to be thrown");
             }
             catch (ArgumentException)
@@ -34,7 +34,7 @@ namespace DomainUnitTests.ValueObjects
         public void ValueReturnsTheExpectedResult()
         {
             const int expectedIterations = 5;
-            var iterationSpecification = new Simulations(expectedIterations);
+            var iterationSpecification = new SimulationsToExecute(expectedIterations);
             Assert.AreEqual(expectedIterations, iterationSpecification.Value());
         }
     }
