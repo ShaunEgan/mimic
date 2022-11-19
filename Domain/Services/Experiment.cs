@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Domain.ValueObjects;
+﻿using Domain.ValueObjects;
 using Domain.ValueObjects.ExperimentResults;
 using Domain.ValueObjects.History;
 
@@ -58,8 +56,7 @@ namespace Domain.Services
     }
 
     /// <summary>
-    /// An experiment can be used to execute an arbitrary number of simulations, providing confidence intervals for burn
-    /// down.
+    /// An experiment can be used to execute an arbitrary number of simulations
     /// </summary>
     public class Experiment
     {
@@ -73,30 +70,12 @@ namespace Domain.Services
 
             for (var i = 0; i < SimulationsToExecute.Value(); i++)
             {
-                results.AddSimulationResult(Simulate());
+                var simulation = new Simulation(History, TasksToComplete);
+                var cyclesUsed = simulation.Execute();
+                results.AddSimulationResult(cyclesUsed);
             }
 
             return results;
-        }
-
-        private CyclesUsed Simulate()
-        {
-            var cycles = 0;
-
-            var samples = History.Value().ToArray();
-            var remaining = TasksToComplete.Value();
-
-            while (remaining > 0)
-            {
-                cycles++;
-
-                var random = new Random();
-                var index = random.Next(0, samples.Length);
-                var sample = samples[index].Value();
-                remaining -= (int)sample;
-            }
-
-            return new CyclesUsed(cycles);
         }
     }
 }
