@@ -8,11 +8,11 @@ namespace Domain.Services
 {
     public interface IBuilder
     {
-        IBuilder Iterations(int iterations);
+        IBuilder SimulationsToExecute(int simulationsToExecute);
 
         IBuilder History(History history);
 
-        IBuilder Backlog(int items);
+        IBuilder TasksToComplete(int tasksToComplete);
 
         Experiment GetExperiment();
     }
@@ -31,9 +31,9 @@ namespace Domain.Services
             _experiment = new Experiment();
         }
 
-        public IBuilder Iterations(int iterations)
+        public IBuilder SimulationsToExecute(int simulationsToExecute)
         {
-            _experiment.SimulationsToExecute = new SimulationsToExecute(iterations);
+            _experiment.SimulationsToExecute = new SimulationsToExecute(simulationsToExecute);
             return this;
         }
 
@@ -43,17 +43,17 @@ namespace Domain.Services
             return this;
         }
 
-        public IBuilder Backlog(int items)
+        public IBuilder TasksToComplete(int tasksToComplete)
         {
-            _experiment.TasksToComplete = new TasksToComplete(items);
+            _experiment.TasksToComplete = new TasksToComplete(tasksToComplete);
             return this;
         }
 
         public Experiment GetExperiment()
         {
-            var result = _experiment;
+            var experiment = _experiment;
             Reset();
-            return result;
+            return experiment;
         }
     }
 

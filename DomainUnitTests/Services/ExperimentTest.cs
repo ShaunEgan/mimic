@@ -18,8 +18,8 @@ namespace DomainUnitTests.Services
 
             var experiment = new ExperimentBuilder()
                 .History(history)
-                .Iterations(Iterations)
-                .Backlog(1)
+                .SimulationsToExecute(Iterations)
+                .TasksToComplete(1)
                 .GetExperiment();
 
             var result = experiment.Run()
