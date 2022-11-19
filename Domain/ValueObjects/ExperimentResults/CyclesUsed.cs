@@ -6,7 +6,7 @@ namespace Domain.ValueObjects
     /// <summary>
     /// Represents the number of cycles used to burndown a set of tasks
     /// </summary>
-    public class CyclesUsed : IValueObject<int>
+    public class CyclesUsed : IValueObject<int>, IComparable
     {
         /// <summary>
         /// The number of cycles used to complete the set of tasks
@@ -35,6 +35,21 @@ namespace Domain.ValueObjects
         public int Value()
         {
             return (int)_cyclesUsed;
+        }
+
+        /// <summary>
+        /// Used for odering
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+
+            if (obj is not CyclesUsed otherCyclesUsed) throw new ArgumentException("Object is not CyclesUsed");
+            
+            return _cyclesUsed.CompareTo(otherCyclesUsed._cyclesUsed);
         }
     }
 }

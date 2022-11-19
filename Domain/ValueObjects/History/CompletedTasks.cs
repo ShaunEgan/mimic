@@ -1,4 +1,5 @@
-﻿using Domain.Abstractions;
+﻿using System;
+using Domain.Abstractions;
 
 namespace Domain.ValueObjects
 {
@@ -18,6 +19,11 @@ namespace Domain.ValueObjects
         /// <param name="completedTasks">The number of tasks completed in the given cycle</param>
         public CompletedTasks(int completedTasks)
         {
+            if (completedTasks < 0)
+            {
+                throw new ArgumentException("CompletedTasks must be a zero or higher");
+            }
+            
             _completedTasks = (uint)completedTasks;
         }
 

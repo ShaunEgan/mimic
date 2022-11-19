@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Domain.Abstractions;
 using Domain.Services;
 using Domain.ValueObjects;
 using Domain.ValueObjects.History;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace DomainIntegrationTests.Services
 {
-    public class ExperimentTest
+    public class ExperimentTests
     {
         private const int SimulationsToExecute = 1000;
         private const int TasksToComplete = 15;
@@ -42,7 +41,13 @@ namespace DomainIntegrationTests.Services
         [Test]
         public void ThereIsAResultForEachCycle()
         {
-            Assert.That(_result, Has.Count.EqualTo(SimulationsToExecute));
+            _result.Should().HaveCount(SimulationsToExecute);
+        }
+
+        [Test]
+        public void TheResultsAreInAscendingOrder()
+        {
+            _result.Should().BeInAscendingOrder();
         }
     }
 }
