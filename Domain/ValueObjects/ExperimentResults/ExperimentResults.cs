@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Domain.ValueObjects
+namespace Domain.ValueObjects.ExperimentResults
 {
     /// <summary>
     /// The results of an experiment

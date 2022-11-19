@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Domain.Services;
 using Domain.ValueObjects;
+using Domain.ValueObjects.History;
 using NUnit.Framework;
 
 namespace DomainUnitTests.Services

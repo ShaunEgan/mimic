@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Domain.ValueObjects;
+using Domain.ValueObjects.ExperimentResults;
+using Domain.ValueObjects.History;
 
 namespace Domain.Services
 {

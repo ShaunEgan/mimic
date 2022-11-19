@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Domain.ValueObjects
+namespace Domain.ValueObjects.History
 {
     /// <summary>
     /// A team's burndown history over n cycles
