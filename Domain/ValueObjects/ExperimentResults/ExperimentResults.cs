@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Domain.Abstractions;
 
 namespace Domain.ValueObjects.ExperimentResults
@@ -29,7 +30,7 @@ namespace Domain.ValueObjects.ExperimentResults
         /// <returns></returns>
         public IEnumerable<CyclesUsed> Value()
         {
-            return _experimentResults;
+            return _experimentResults.OrderBy(c => c.Value());
         }
     }
 }
