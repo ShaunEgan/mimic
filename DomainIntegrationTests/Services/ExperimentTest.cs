@@ -4,12 +4,12 @@ using Domain.ValueObjects;
 using Domain.ValueObjects.History;
 using NUnit.Framework;
 
-namespace DomainUnitTests.Services
+namespace DomainIntegrationTests.Services
 {
     public class ExperimentTest
     {
         private const int Iterations = 10000;
-
+        
         [Test]
         public void TestResultSizeMatchesIterationSize()
         {
