@@ -1,33 +1,34 @@
 ﻿using Domain.Abstractions;
 using Domain.ValueObjects;
+using Domain.ValueObjects.ExperimentResults;
+using Domain.ValueObjects.History;
 
-namespace Domain.Services
+namespace Domain.Services;
+
+public class Simulation
 {
-    public class Simulation
+    private readonly TasksToComplete _tasksToComplete;
+    private readonly ISampler<CompletedTasks> _sampler;
+
+    public Simulation(TasksToComplete tasksToComplete, ISampler<CompletedTasks> sampler)
     {
-        private readonly TasksToComplete _tasksToComplete;
-        private readonly ISampler<CompletedTasks> _sampler;
+        _tasksToComplete = tasksToComplete;
+        _sampler = sampler;
+    }
 
-        public Simulation(TasksToComplete tasksToComplete, ISampler<CompletedTasks> sampler)
+    public CyclesUsed Execute()
+    {
+        var cycles = 0;
+        var remaining = _tasksToComplete.Value();
+
+        while (remaining > 0)
         {
-            _tasksToComplete = tasksToComplete;
-            _sampler = sampler;
+            cycles++;
+
+            var sample = _sampler.NextSample().Value();
+            remaining -= (int)sample;
         }
 
-        public CyclesUsed Execute()
-        {
-            var cycles = 0;
-            var remaining = _tasksToComplete.Value();
-
-            while (remaining > 0)
-            {
-                cycles++;
-
-                var sample = _sampler.NextSample().Value();
-                remaining -= (int)sample;
-            }
-
-            return new CyclesUsed(cycles);
-        }
+        return new CyclesUsed(cycles);
     }
 }

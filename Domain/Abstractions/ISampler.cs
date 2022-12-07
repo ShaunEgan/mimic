@@ -1,10 +1,9 @@
-﻿namespace Domain.Abstractions
+﻿namespace Domain.Abstractions;
+
+/// <summary>
+/// ISampler concretions fetch samples based on a known history
+/// </summary>
+public interface ISampler<out T>
 {
-    /// <summary>
-    /// ISampler concretions fetch samples based on a known history
-    /// </summary>
-    public interface ISampler<out T>
-    {
-        public T NextSample();
-    }
+    public T NextSample();
 }
