@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using Domain.Abstractions;
 using Domain.Services;
-using Domain.ValueObjects;
 using Domain.ValueObjects.ExperimentResults;
 using Domain.ValueObjects.History;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace DomainIntegrationTests.Services;
 
@@ -14,38 +13,34 @@ public class ExperimentTests
     private const int SimulationsToExecute = 1000;
     private const int TasksToComplete = 15;
 
-    private History _history;
-    private ISampler<CompletedTasks> _sampler;
-    private Experiment _experiment;
-    private IEnumerable<CyclesUsed> _result;
+    private readonly IEnumerable<CyclesUsed> _result;
 
-    [SetUp]
-    public void ExperimentOutlierTestSetup()
+    public ExperimentTests()
     {
-        _history = new History();
-        _history.AddTasksCompletedInACycle(new CompletedTasks(1));
-        _history.AddTasksCompletedInACycle(new CompletedTasks(2));
-        _history.AddTasksCompletedInACycle(new CompletedTasks(3));
+        var history = new History();
+        history.AddTasksCompletedInACycle(new CompletedTasks(1));
+        history.AddTasksCompletedInACycle(new CompletedTasks(2));
+        history.AddTasksCompletedInACycle(new CompletedTasks(3));
 
-        _sampler = new RandomHistoricalSampler(_history);
+        ISampler<CompletedTasks> sampler = new RandomHistoricalSampler(history);
 
-        _experiment = new ExperimentBuilder()
-            .Sampler(_sampler)
+        var experiment = new ExperimentBuilder()
+            .Sampler(sampler)
             .SimulationsToExecute(SimulationsToExecute)
             .TasksToComplete(TasksToComplete)
             .GetExperiment();
 
-        _result = _experiment.Run()
+        _result = experiment.Run()
             .Value();
     }
 
-    [Test]
+    [Fact]
     public void ThereIsAResultForEachCycle()
     {
         _result.Should().HaveCount(SimulationsToExecute);
     }
 
-    [Test]
+    [Fact]
     public void TheResultsAreInAscendingOrder()
     {
         _result.Should().BeInAscendingOrder();
