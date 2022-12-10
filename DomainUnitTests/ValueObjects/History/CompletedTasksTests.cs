@@ -1,28 +1,27 @@
 ﻿using System;
-using Domain.ValueObjects;
 using Domain.ValueObjects.History;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace DomainUnitTests.ValueObjects.History;
 
 public class RecordTest
 {
-    [Test]
+    [Fact]
     public void DoesNotThrowAnExceptionWhenPassedAValidNumber()
     {
         Action action = () => new CompletedTasks(0);
         action.Should().NotThrow();
     }
 
-    [Test]
+    [Fact]
     public void ThrowsAnArgumentExceptionWhenPassedAnInvalidNumber()
     {
         Action action = () => new CompletedTasks(-1);
         action.Should().ThrowExactly<ArgumentException>();
     }
 
-    [Test]
+    [Fact]
     public void ValueReturnsTheExpectedResult()
     {
         const int expectedCompletedTasks = 5;

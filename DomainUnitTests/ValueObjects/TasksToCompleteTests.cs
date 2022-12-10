@@ -1,27 +1,27 @@
 ﻿using System;
 using Domain.ValueObjects;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace DomainUnitTests.ValueObjects;
 
 public class TasksToCompleteTests
 {
-    [Test]
+    [Fact]
     public void DoesNotThrowAnExceptionWhenPassedAValidNumber()
     {
         Action action = () => new TasksToComplete(1);
         action.Should().NotThrow();
     }
 
-    [Test]
+    [Fact]
     public void ThrowsAnArgumentExceptionWhenPassedAnInvalidNumber()
     {
         Action action = () => new TasksToComplete(-1);
         action.Should().ThrowExactly<ArgumentException>();
     }
 
-    [Test]
+    [Fact]
     public void ValueReturnsTheExpectedResult()
     {
         const int expectedTasksToComplete = 5;
