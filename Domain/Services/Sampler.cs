@@ -2,7 +2,6 @@
 using System.Linq;
 using Domain.Abstractions;
 using Domain.ValueObjects;
-using Domain.ValueObjects.History;
 
 namespace Domain.Services;
 

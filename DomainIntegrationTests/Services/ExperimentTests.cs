@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Domain.Abstractions;
 using Domain.Services;
-using Domain.ValueObjects.ExperimentResults;
-using Domain.ValueObjects.History;
+using Domain.ValueObjects;
 using FluentAssertions;
 using Xunit;
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using Domain.Abstractions;
 
-namespace Domain.ValueObjects.ExperimentResults;
+namespace Domain.ValueObjects;
 
 /// <summary>
 /// The results of an experiment

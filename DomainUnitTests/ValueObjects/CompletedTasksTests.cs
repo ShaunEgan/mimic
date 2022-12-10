@@ -1,9 +1,9 @@
 ﻿using System;
-using Domain.ValueObjects.History;
+using Domain.ValueObjects;
 using FluentAssertions;
 using Xunit;
 
-namespace DomainUnitTests.ValueObjects.History;
+namespace DomainUnitTests.ValueObjects;
 
 public class RecordTest
 {

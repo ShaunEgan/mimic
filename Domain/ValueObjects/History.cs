@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Domain.Abstractions;
 
-namespace Domain.ValueObjects.History;
+namespace Domain.ValueObjects;
 
 /// <summary>
 /// A team's burndown history over n cycles
@@ -11,7 +12,7 @@ public class History : IValueObject<IEnumerable<CompletedTasks>>
     /// <summary>
     /// The tasks completed by a team over n cycles
     /// </summary>
-    private readonly List<CompletedTasks> _history = new();
+    private IEnumerable<CompletedTasks> _history = new List<CompletedTasks>();
 
     /// <summary>
     /// Add a record of the number of tasks completed by the team in a single cycle
@@ -19,7 +20,7 @@ public class History : IValueObject<IEnumerable<CompletedTasks>>
     /// <param name="completedTasks">The number of tasks completed in a single cycle</param>
     public void AddTasksCompletedInACycle(CompletedTasks completedTasks)
     {
-        _history.Add(completedTasks);
+        _history = _history.Append(completedTasks);
     }
 
     /// <summary>
