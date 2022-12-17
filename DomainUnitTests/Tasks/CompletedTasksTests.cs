@@ -10,14 +10,14 @@ public class RecordTest
     [Fact]
     public void DoesNotThrowAnExceptionWhenPassedAValidNumber()
     {
-        Action action = () => new CompletedTasks(0);
+        var action = () => new CompletedTasks(0);
         action.Should().NotThrow();
     }
 
     [Fact]
     public void ThrowsAnArgumentExceptionWhenPassedAnInvalidNumber()
     {
-        Action action = () => new CompletedTasks(-1);
+        var action = () => new CompletedTasks(-1);
         action.Should().ThrowExactly<ArgumentException>();
     }
 
