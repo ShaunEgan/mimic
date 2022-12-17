@@ -7,12 +7,12 @@ namespace DomainUnitTests.ValueObjects;
 
 public class HistoryTest
 {
-    private readonly History _sut;
+    private readonly BurndownHistory _sut;
     private readonly CompletedTasks _completedTasks = new (1);
 
     public HistoryTest()
     {
-        _sut = new History();
+        _sut = new BurndownHistory();
     }
 
     [Fact]

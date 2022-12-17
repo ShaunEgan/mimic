@@ -16,10 +16,10 @@ public class RandomHistoricalSampler : ISampler<CompletedTasks>
     /// <summary>
     /// RandomHistoricalSampler is able to return random samples from history
     /// </summary>
-    /// <param name="history"></param>
-    public RandomHistoricalSampler(History history)
+    /// <param name="burndownHistory"></param>
+    public RandomHistoricalSampler(BurndownHistory burndownHistory)
     {
-        _samples = history.Value().ToArray();
+        _samples = burndownHistory.Value().ToArray();
         _random = new Random();
     }
 

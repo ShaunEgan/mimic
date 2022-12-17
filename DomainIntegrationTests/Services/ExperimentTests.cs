@@ -16,15 +16,22 @@ public class ExperimentTests
 
     public ExperimentTests()
     {
-        var history = new History();
-        history.AddTasksCompletedInACycle(new CompletedTasks(1));
-        history.AddTasksCompletedInACycle(new CompletedTasks(2));
-        history.AddTasksCompletedInACycle(new CompletedTasks(3));
+        var burndownHistory = new BurndownHistory();
+        burndownHistory.AddTasksCompletedInACycle(new CompletedTasks(1));
+        burndownHistory.AddTasksCompletedInACycle(new CompletedTasks(2));
+        burndownHistory.AddTasksCompletedInACycle(new CompletedTasks(3));
 
-        ISampler<CompletedTasks> burndownSampler = new RandomHistoricalSampler(history);
+        var regressionHistory = new RegressionHistory();
+        regressionHistory.AddTasksAddedInACycle(new AddedTasks(0));
+        regressionHistory.AddTasksAddedInACycle(new AddedTasks(1));
+        regressionHistory.AddTasksAddedInACycle(new AddedTasks(0));
+
+        ISampler<CompletedTasks> burndownSampler = new RandomHistoricalSampler(burndownHistory);
+        ISampler<AddedTasks> regressionSampler = new RandomRegressionSampler(regressionHistory);
 
         var experiment = new ExperimentBuilder()
             .BurndownSampler(burndownSampler)
+            .RegressionSampler(regressionSampler)
             .SimulationsToExecute(SimulationsToExecute)
             .TasksToComplete(TasksToComplete)
             .GetExperiment();

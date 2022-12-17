@@ -7,7 +7,7 @@ namespace Domain.ValueObjects;
 /// <summary>
 /// A team's burndown history over n cycles
 /// </summary>
-public class History : IValueObject<IEnumerable<CompletedTasks>>
+public class BurndownHistory : IValueObject<IEnumerable<CompletedTasks>>
 {
     /// <summary>
     /// The tasks completed by a team over n cycles

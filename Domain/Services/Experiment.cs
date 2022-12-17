@@ -9,6 +9,8 @@ public interface IBuilder
 
     IBuilder BurndownSampler(ISampler<CompletedTasks> sampler);
 
+    IBuilder RegressionSampler(ISampler<AddedTasks> sampler);
+
     IBuilder TasksToComplete(int tasksToComplete);
 
     Experiment GetExperiment();
@@ -36,7 +38,13 @@ public class ExperimentBuilder : IBuilder
 
     public IBuilder BurndownSampler(ISampler<CompletedTasks> sampler)
     {
-        _experiment.Sampler = sampler;
+        _experiment.BurndownSampler = sampler;
+        return this;
+    }
+
+    public IBuilder RegressionSampler(ISampler<AddedTasks> sampler)
+    {
+        _experiment.RegressionSampler = sampler;
         return this;
     }
 
@@ -61,7 +69,8 @@ public class Experiment
 {
     internal SimulationsToExecute SimulationsToExecute;
     internal TasksToComplete TasksToComplete;
-    internal ISampler<CompletedTasks> Sampler;
+    internal ISampler<CompletedTasks> BurndownSampler;
+    internal ISampler<AddedTasks> RegressionSampler;
 
     public ExperimentResults Run()
     {
@@ -69,7 +78,7 @@ public class Experiment
 
         for (var i = 0; i < SimulationsToExecute.Value(); i++)
         {
-            var simulation = new Simulation(TasksToComplete, Sampler);
+            var simulation = new Simulation(TasksToComplete, BurndownSampler, RegressionSampler);
             var cyclesUsed = simulation.Execute();
             results.AddSimulationResult(cyclesUsed);
         }
