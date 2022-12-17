@@ -33,12 +33,10 @@ public class Simulation
             if (cycles > _maxCycles.Value()) throw new Exception("Simulation exceeded configured number of max cycles");
 
             var completedTasks = _burndownSampler.NextSample().Value();
-            remaining -= (int)completedTasks;
-
-            if (_regressionSampler == null) continue;
+            remaining -= completedTasks;
 
             var regressionTasks = _regressionSampler.NextSample().Value();
-            remaining += (int)regressionTasks;
+            remaining += regressionTasks;
         }
 
         return new CyclesUsed(cycles);

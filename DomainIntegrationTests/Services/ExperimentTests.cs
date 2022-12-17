@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Domain.Experiments;
+using Domain.Experiments.Configuration;
 using Domain.History;
 using Domain.History.Samplers;
 using Domain.Tasks;
@@ -27,16 +28,17 @@ public class ExperimentTests
         regressionHistory.Add(new AddedTasks(1));
         regressionHistory.Add(new AddedTasks(0));
 
-        ISampler<CompletedTasks> burndownSampler = new CompletedTasksRandomSampler(burndownHistory);
-        ISampler<AddedTasks> regressionSampler = new RegressionRandomSampler(regressionHistory);
+        var configuration = new Configuration
+        {
+            TasksToComplete = new TasksToComplete(TasksToComplete),
+            BurndownSampler = new CompletedTasksRandomSampler(burndownHistory),
+            RegressionSampler = new RegressionRandomSampler(regressionHistory),
+            SimulationsToExecute = new SimulationsToExecute(SimulationsToExecute),
+            MaxCycles = new MaxCycles()
+        };
 
-        var experiment = new ExperimentBuilder()
-            .BurndownSampler(burndownSampler)
-            .RegressionSampler(regressionSampler)
-            .SimulationsToExecute(SimulationsToExecute)
-            .TasksToComplete(TasksToComplete)
-            .GetExperiment();
-
+        var experiment = new Experiment(configuration);
+        
         _result = experiment.Run()
             .Value();
     }
