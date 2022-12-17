@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using Domain.ValueObjects;
+using Domain.History;
+using Domain.Tasks;
 using FluentAssertions;
 using Xunit;
 
-namespace DomainUnitTests.ValueObjects;
+namespace DomainUnitTests.History;
 
 public class HistoryTest
 {
@@ -18,14 +19,14 @@ public class HistoryTest
     [Fact]
     public void AddTasksCompletedInACycle_DoesNotThrow_WhenAddingACompletedTasks()
     {
-        var action = () => _sut.AddTasksCompletedInACycle(_completedTasks);
+        var action = () => _sut.Add(_completedTasks);
         action.Should().NotThrow();
     }
     
     [Fact]
     public void Value_ReturnsListOfAddedCompletedTasks_WhenTasksHaveBeenAdded()
     {
-        _sut.AddTasksCompletedInACycle(_completedTasks);
+        _sut.Add(_completedTasks);
         var result = _sut.Value();
         result.Should().Equal(new List<CompletedTasks> { _completedTasks });
     }

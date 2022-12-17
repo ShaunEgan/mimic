@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain.Abstractions;
 
-namespace Domain.ValueObjects;
+namespace Domain.Experiment;
 
 /// <summary>
 /// The number of simulations to run for the experiment

@@ -1,4 +1,4 @@
-﻿namespace Domain.Abstractions;
+﻿namespace Domain.History.Samplers;
 
 /// <summary>
 /// ISampler concretions fetch samples based on a known history

@@ -2,12 +2,12 @@
 using System.Linq;
 using Domain.Abstractions;
 
-namespace Domain.ValueObjects;
+namespace Domain.Experiment;
 
 /// <summary>
 /// The results of an experiment
 /// </summary>
-public class ExperimentResults : IValueObject<IEnumerable<CyclesUsed>>
+public class Results : IValueObject<IEnumerable<CyclesUsed>>
 {
     /// <summary>
     /// The results of the experiment

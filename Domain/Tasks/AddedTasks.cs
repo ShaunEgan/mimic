@@ -1,7 +1,7 @@
 using System;
 using Domain.Abstractions;
 
-namespace Domain.ValueObjects;
+namespace Domain.Tasks;
 
 public class AddedTasks : IValueObject<int>
 {

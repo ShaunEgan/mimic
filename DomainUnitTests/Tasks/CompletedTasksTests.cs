@@ -1,9 +1,9 @@
 ﻿using System;
-using Domain.ValueObjects;
+using Domain.Tasks;
 using FluentAssertions;
 using Xunit;
 
-namespace DomainUnitTests.ValueObjects;
+namespace DomainUnitTests.Tasks;
 
 public class RecordTest
 {

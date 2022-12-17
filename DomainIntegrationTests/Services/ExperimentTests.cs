@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Domain.Abstractions;
-using Domain.Services;
-using Domain.ValueObjects;
+using Domain.Experiment;
+using Domain.History;
+using Domain.History.Samplers;
+using Domain.Tasks;
 using FluentAssertions;
 using Xunit;
 
@@ -17,14 +19,14 @@ public class ExperimentTests
     public ExperimentTests()
     {
         var burndownHistory = new BurndownHistory();
-        burndownHistory.AddTasksCompletedInACycle(new CompletedTasks(1));
-        burndownHistory.AddTasksCompletedInACycle(new CompletedTasks(2));
-        burndownHistory.AddTasksCompletedInACycle(new CompletedTasks(3));
+        burndownHistory.Add(new CompletedTasks(1));
+        burndownHistory.Add(new CompletedTasks(2));
+        burndownHistory.Add(new CompletedTasks(3));
 
         var regressionHistory = new RegressionHistory();
-        regressionHistory.AddTasksAddedInACycle(new AddedTasks(0));
-        regressionHistory.AddTasksAddedInACycle(new AddedTasks(1));
-        regressionHistory.AddTasksAddedInACycle(new AddedTasks(0));
+        regressionHistory.Add(new AddedTasks(0));
+        regressionHistory.Add(new AddedTasks(1));
+        regressionHistory.Add(new AddedTasks(0));
 
         ISampler<CompletedTasks> burndownSampler = new RandomHistoricalSampler(burndownHistory);
         ISampler<AddedTasks> regressionSampler = new RandomRegressionSampler(regressionHistory);

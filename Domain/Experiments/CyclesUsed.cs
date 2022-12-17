@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain.Abstractions;
 
-namespace Domain.ValueObjects;
+namespace Domain.Experiment;
 
 /// <summary>
 /// Represents the number of cycles used to burndown a set of tasks

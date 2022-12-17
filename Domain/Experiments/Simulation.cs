@@ -1,8 +1,8 @@
 ﻿using System;
-using Domain.Abstractions;
-using Domain.ValueObjects;
+using Domain.History.Samplers;
+using Domain.Tasks;
 
-namespace Domain.Services;
+namespace Domain.Experiment;
 
 public class Simulation
 {
@@ -11,7 +11,8 @@ public class Simulation
     private readonly ISampler<AddedTasks> _regressionSampler;
     private readonly int _maxCycles;
 
-    public Simulation(TasksToComplete tasksToComplete, ISampler<CompletedTasks> burndownSampler, ISampler<AddedTasks> regressionSampler, int maxCycles = 1000)
+    public Simulation(TasksToComplete tasksToComplete, ISampler<CompletedTasks> burndownSampler,
+        ISampler<AddedTasks> regressionSampler, int maxCycles = 1000)
     {
         _tasksToComplete = tasksToComplete;
         _burndownSampler = burndownSampler;
@@ -34,7 +35,7 @@ public class Simulation
             remaining -= (int)completedTasks;
 
             if (_regressionSampler == null) continue;
-            
+
             var regressionTasks = _regressionSampler.NextSample().Value();
             remaining += (int)regressionTasks;
         }

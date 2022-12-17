@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Domain.Abstractions;
-using Domain.ValueObjects;
+using Domain.Tasks;
 
-namespace Domain.Services;
+namespace Domain.History.Samplers;
 
 /// <summary>
 /// Chooses a random sample from history. This will only return values which exist in history.

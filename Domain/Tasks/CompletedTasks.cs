@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain.Abstractions;
 
-namespace Domain.ValueObjects;
+namespace Domain.Tasks;
 
 /// <summary>
 /// Represents the number of tasks completed in a given cycle

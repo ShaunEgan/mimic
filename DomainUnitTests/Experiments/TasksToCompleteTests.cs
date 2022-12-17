@@ -1,9 +1,9 @@
 ﻿using System;
-using Domain.ValueObjects;
+using Domain.Experiment;
 using FluentAssertions;
 using Xunit;
 
-namespace DomainUnitTests.ValueObjects;
+namespace DomainUnitTests.Experiments;
 
 public class TasksToCompleteTests
 {

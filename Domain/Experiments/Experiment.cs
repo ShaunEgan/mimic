@@ -1,7 +1,7 @@
-﻿using Domain.Abstractions;
-using Domain.ValueObjects;
+﻿using Domain.History.Samplers;
+using Domain.Tasks;
 
-namespace Domain.Services;
+namespace Domain.Experiment;
 
 public interface IBuilder
 {
@@ -72,9 +72,9 @@ public class Experiment
     internal ISampler<CompletedTasks> BurndownSampler;
     internal ISampler<AddedTasks> RegressionSampler;
 
-    public ExperimentResults Run()
+    public Results Run()
     {
-        var results = new ExperimentResults();
+        var results = new Results();
 
         for (var i = 0; i < SimulationsToExecute.Value(); i++)
         {
