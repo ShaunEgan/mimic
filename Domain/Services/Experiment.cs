@@ -7,7 +7,7 @@ public interface IBuilder
 {
     IBuilder SimulationsToExecute(int simulationsToExecute);
 
-    IBuilder Sampler(ISampler<CompletedTasks> sampler);
+    IBuilder BurndownSampler(ISampler<CompletedTasks> sampler);
 
     IBuilder TasksToComplete(int tasksToComplete);
 
@@ -34,7 +34,7 @@ public class ExperimentBuilder : IBuilder
         return this;
     }
 
-    public IBuilder Sampler(ISampler<CompletedTasks> sampler)
+    public IBuilder BurndownSampler(ISampler<CompletedTasks> sampler)
     {
         _experiment.Sampler = sampler;
         return this;

@@ -21,10 +21,10 @@ public class ExperimentTests
         history.AddTasksCompletedInACycle(new CompletedTasks(2));
         history.AddTasksCompletedInACycle(new CompletedTasks(3));
 
-        ISampler<CompletedTasks> sampler = new RandomHistoricalSampler(history);
+        ISampler<CompletedTasks> burndownSampler = new RandomHistoricalSampler(history);
 
         var experiment = new ExperimentBuilder()
-            .Sampler(sampler)
+            .BurndownSampler(burndownSampler)
             .SimulationsToExecute(SimulationsToExecute)
             .TasksToComplete(TasksToComplete)
             .GetExperiment();
