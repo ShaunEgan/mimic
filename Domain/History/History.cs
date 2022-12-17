@@ -12,6 +12,11 @@ public abstract class History<T> : IHistory<T>
         _history = _history.Append(tasks);
     }
 
+    public void From(IEnumerable<T> tasksHistory)
+    {
+        _history = _history.Concat(tasksHistory);
+    }
+
     /// <summary>
     /// Get the team's history of the feature 
     /// </summary>

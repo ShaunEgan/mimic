@@ -19,14 +19,20 @@ public class ExperimentTests
     public ExperimentTests()
     {
         var burndownHistory = new BurndownHistory();
-        burndownHistory.Add(new CompletedTasks(1));
-        burndownHistory.Add(new CompletedTasks(2));
-        burndownHistory.Add(new CompletedTasks(3));
+        burndownHistory.From(new[]
+        {
+            new CompletedTasks(1),
+            new CompletedTasks(2),
+            new CompletedTasks(3)
+        });
 
         var regressionHistory = new RegressionHistory();
-        regressionHistory.Add(new AddedTasks(0));
-        regressionHistory.Add(new AddedTasks(1));
-        regressionHistory.Add(new AddedTasks(0));
+        regressionHistory.From(new[]
+        {
+            new AddedTasks(0),
+            new AddedTasks(1),
+            new AddedTasks(0),
+        });
 
         var configuration = new Configuration
         {
@@ -38,7 +44,7 @@ public class ExperimentTests
         };
 
         var experiment = new Experiment(configuration);
-        
+
         _result = experiment.Run()
             .Value();
     }
