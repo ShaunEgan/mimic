@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using Domain.Abstractions;
-using Domain.Experiment;
+using Domain.Experiments;
 using Domain.History;
 using Domain.History.Samplers;
 using Domain.Tasks;
@@ -28,8 +27,8 @@ public class ExperimentTests
         regressionHistory.Add(new AddedTasks(1));
         regressionHistory.Add(new AddedTasks(0));
 
-        ISampler<CompletedTasks> burndownSampler = new RandomHistoricalSampler(burndownHistory);
-        ISampler<AddedTasks> regressionSampler = new RandomRegressionSampler(regressionHistory);
+        ISampler<CompletedTasks> burndownSampler = new CompletedTasksRandomSampler(burndownHistory);
+        ISampler<AddedTasks> regressionSampler = new RegressionRandomSampler(regressionHistory);
 
         var experiment = new ExperimentBuilder()
             .BurndownSampler(burndownSampler)

@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain.Abstractions;
 
-namespace Domain.Experiment;
+namespace Domain.Experiments;
 
 /// <summary>
 /// The number of tasks required to be completed

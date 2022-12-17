@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain.Experiment;
+using Domain.Experiments;
 using FluentAssertions;
 using Xunit;
 

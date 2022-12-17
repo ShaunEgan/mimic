@@ -1,7 +1,7 @@
 ﻿using Domain.History.Samplers;
 using Domain.Tasks;
 
-namespace Domain.Experiment;
+namespace Domain.Experiments;
 
 public interface IBuilder
 {
