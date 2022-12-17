@@ -1,4 +1,5 @@
-﻿using Domain.History.Samplers;
+﻿using Domain.Experiments.Configuration;
+using Domain.History.Samplers;
 using Domain.Tasks;
 
 namespace Domain.Experiments;
@@ -13,6 +14,8 @@ public interface IBuilder
 
     IBuilder TasksToComplete(int tasksToComplete);
 
+    IBuilder MaxCycles(int maxCycles);
+    
     Experiment GetExperiment();
 }
 
@@ -54,6 +57,12 @@ public class ExperimentBuilder : IBuilder
         return this;
     }
 
+    public IBuilder MaxCycles(int maxCycles)
+    {
+        _experiment.MaxCycles = new MaxCycles(maxCycles);
+        return this;
+    }
+
     public Experiment GetExperiment()
     {
         var experiment = _experiment;
@@ -71,14 +80,17 @@ public class Experiment
     internal TasksToComplete TasksToComplete;
     internal ISampler<CompletedTasks> BurndownSampler;
     internal ISampler<AddedTasks> RegressionSampler;
+    internal MaxCycles MaxCycles;
 
     public Results Run()
     {
+        MaxCycles ??= new MaxCycles();
+        
         var results = new Results();
 
         for (var i = 0; i < SimulationsToExecute.Value(); i++)
         {
-            var simulation = new Simulation(TasksToComplete, BurndownSampler, RegressionSampler);
+            var simulation = new Simulation(TasksToComplete, BurndownSampler, RegressionSampler, MaxCycles);
             var cyclesUsed = simulation.Execute();
             results.AddSimulationResult(cyclesUsed);
         }

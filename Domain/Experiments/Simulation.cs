@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain.Experiments.Configuration;
 using Domain.History.Samplers;
 using Domain.Tasks;
 
@@ -9,10 +10,10 @@ public class Simulation
     private readonly TasksToComplete _tasksToComplete;
     private readonly ISampler<CompletedTasks> _burndownSampler;
     private readonly ISampler<AddedTasks> _regressionSampler;
-    private readonly int _maxCycles;
+    private readonly MaxCycles _maxCycles;
 
     public Simulation(TasksToComplete tasksToComplete, ISampler<CompletedTasks> burndownSampler,
-        ISampler<AddedTasks> regressionSampler, int maxCycles = 1000)
+        ISampler<AddedTasks> regressionSampler, MaxCycles maxCycles)
     {
         _tasksToComplete = tasksToComplete;
         _burndownSampler = burndownSampler;
@@ -29,7 +30,7 @@ public class Simulation
         {
             cycles++;
 
-            if (cycles > _maxCycles) throw new Exception("Unstable burndown encountered");
+            if (cycles > _maxCycles.Value()) throw new Exception("Simulation exceeded configured number of max cycles");
 
             var completedTasks = _burndownSampler.NextSample().Value();
             remaining -= (int)completedTasks;

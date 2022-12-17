@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain.Abstractions;
 
-namespace Domain.Experiments;
+namespace Domain.Experiments.Configuration;
 
 /// <summary>
 /// The number of simulations to run for the experiment
@@ -16,13 +16,15 @@ public class SimulationsToExecute : IValueObject<int>
     /// <summary>
     /// Specify the number of simulations to run for the experiment.
     /// 
-    /// This number must be a positive integer greater than 0.
+    /// This number must be greater than 0.
+    /// This number defaults to 10 000 simulations to execute.
     /// </summary>
     /// <param name="simulationsToExecute">The minimum number of simulations to execute</param>
     /// <exception cref="ArgumentException">Thrown when the number of iterations is not a positive integer greater than 0</exception>
-    public SimulationsToExecute(int simulationsToExecute)
+    public SimulationsToExecute(int simulationsToExecute = 10000)
     {
-        if (simulationsToExecute < 1)
+        var simulationsToExecuteGreaterThanZero = simulationsToExecute > 0;
+        if (!simulationsToExecuteGreaterThanZero)
         {
             throw new ArgumentException("Simulations must be a positive integer higher than 0");
         }
