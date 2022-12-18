@@ -7,7 +7,7 @@ namespace Domain.Experiments;
 /// <summary>
 /// The results of an experiment
 /// </summary>
-public class Results : IValueObject<IEnumerable<CyclesUsed>>
+public class ExperimentResults : IValueObject<IEnumerable<CyclesUsed>>
 {
     /// <summary>
     /// The results of the experiment

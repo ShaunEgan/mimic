@@ -1,0 +1,20 @@
+### RunExperiment
+// Given the following burndown and regression history, burn down 15 tasks
+POST https://localhost:7126/experiment
+Accept: application/json
+Content-Type: application/json
+
+{
+  "tasksToComplete": 15,
+  "simulationsToExecute": 10000,
+  "maxCycles": 1000,
+  "burndownHistory": [ 0, 1, 5, 2, 4, 1, 0, 2, 3, 0, 1],
+  "simulationRegressions": [],
+  "cycleRegressions": [
+    {
+      "type": "RandomRegressionSampler",
+      "data": [0, 1, 0, 0, 0 , 1, 0, 0, 0, 1, 0],
+      "probability": 1
+    }
+  ]
+}
