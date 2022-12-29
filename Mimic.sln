@@ -4,17 +4,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BC76C04A-ACE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9B534AA3-357A-4F0B-A0B5-679685FD6648}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{85F5E1BC-D04F-4072-8F85-28BAFD8CB966}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mimic.Domain", "Mimic.Domain\Mimic.Domain.csproj", "{85F5E1BC-D04F-4072-8F85-28BAFD8CB966}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainUnitTests", "DomainUnitTests\DomainUnitTests.csproj", "{B9AF72EF-9EAB-479E-AED4-B2E745973EC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mimic.DomainUnitTests", "Mimic.DomainUnitTests\Mimic.DomainUnitTests.csproj", "{B9AF72EF-9EAB-479E-AED4-B2E745973EC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainIntegrationTests", "DomainIntegrationTests\DomainIntegrationTests.csproj", "{90CC92B5-34BF-4C3B-B6C3-D3CD0468062A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mimic.DomainIntegrationTests", "Mimic.DomainIntegrationTests\Mimic.DomainIntegrationTests.csproj", "{90CC92B5-34BF-4C3B-B6C3-D3CD0468062A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{D4E99007-000B-4CD9-81CE-A8AF305B8983}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mimic.Api", "Mimic.Api\Mimic.Api.csproj", "{D4E99007-000B-4CD9-81CE-A8AF305B8983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{B7360BC3-0715-48EB-966C-B4D92360E094}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mimic.Contracts", "Mimic.Contracts\Mimic.Contracts.csproj", "{B7360BC3-0715-48EB-966C-B4D92360E094}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{2649BF43-FCCB-4BBC-894A-2D2D01079FCC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mimic.Application", "Mimic.Application\Mimic.Application.csproj", "{2649BF43-FCCB-4BBC-894A-2D2D01079FCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
