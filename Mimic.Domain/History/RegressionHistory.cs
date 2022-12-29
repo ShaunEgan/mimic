@@ -1,10 +1,8 @@
-using Mimic.Domain.Tasks;
-
 namespace Mimic.Domain.History;
 
 /// <summary>
-/// A team's regression history over n cycles
+/// The team's history of tasks that get added back to the work per cycle
 /// </summary>
-public class RegressionHistory : History<AddedTasks>
+public class RegressionHistory : History<Tasks>
 {
 }

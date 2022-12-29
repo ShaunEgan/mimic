@@ -1,31 +1,31 @@
 ﻿using System;
-using Mimic.Domain.Tasks;
 using FluentAssertions;
+using Mimic.Domain.History;
 using Xunit;
 
-namespace Mimic.DomainUnitTests.Tasks;
+namespace Mimic.DomainUnitTests.History;
 
-public class RecordTest
+public class TasksTest
 {
     [Fact]
     public void DoesNotThrowAnExceptionWhenPassedAValidNumber()
     {
-        var action = () => new CompletedTasks(0);
+        var action = () => new Tasks(0);
         action.Should().NotThrow();
     }
 
     [Fact]
     public void ThrowsAnArgumentExceptionWhenPassedAnInvalidNumber()
     {
-        var action = () => new CompletedTasks(-1);
-        action.Should().ThrowExactly<ArgumentException>();
+        var action = () => new Tasks(-1);
+        action.Should().ThrowExactly<ArgumentOutOfRangeException>();
     }
 
     [Fact]
     public void ValueReturnsTheExpectedResult()
     {
         const int expectedCompletedTasks = 5;
-        var record = new CompletedTasks(expectedCompletedTasks);
+        var record = new Tasks(expectedCompletedTasks);
         record.Value().Should().Be(expectedCompletedTasks);
     }
 }

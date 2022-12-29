@@ -1,19 +1,19 @@
 ﻿using System;
 using Mimic.Domain.Experiments.Configuration;
 using Mimic.Domain.History.Samplers;
-using Mimic.Domain.Tasks;
+using Mimic.Domain.History;
 
 namespace Mimic.Domain.Experiments;
 
 public class Simulation
 {
     private readonly TasksToComplete _tasksToComplete;
-    private readonly ISampler<CompletedTasks> _burndownSampler;
-    private readonly ISampler<AddedTasks> _regressionSampler;
+    private readonly ISampler<Tasks> _burndownSampler;
+    private readonly ISampler<Tasks> _regressionSampler;
     private readonly MaxCycles _maxCycles;
 
-    public Simulation(TasksToComplete tasksToComplete, ISampler<CompletedTasks> burndownSampler,
-        ISampler<AddedTasks> regressionSampler, MaxCycles maxCycles)
+    public Simulation(TasksToComplete tasksToComplete, ISampler<Tasks> burndownSampler,
+        ISampler<Tasks> regressionSampler, MaxCycles maxCycles)
     {
         _tasksToComplete = tasksToComplete;
         _burndownSampler = burndownSampler;

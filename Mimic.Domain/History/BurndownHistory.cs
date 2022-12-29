@@ -1,10 +1,8 @@
-﻿using Mimic.Domain.Tasks;
-
 namespace Mimic.Domain.History;
 
 /// <summary>
-/// A team's burndown history over n cycles
+/// The team's history of tasks that are burned down per cycle
 /// </summary>
-public class BurndownHistory : History<CompletedTasks>
+public class BurndownHistory : History<Tasks>
 {
 }

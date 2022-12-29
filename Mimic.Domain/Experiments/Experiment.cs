@@ -1,6 +1,6 @@
 ﻿using Mimic.Domain.Experiments.Configuration;
+using Mimic.Domain.History;
 using Mimic.Domain.History.Samplers;
-using Mimic.Domain.Tasks;
 
 namespace Mimic.Domain.Experiments;
 
@@ -11,8 +11,8 @@ public class Experiment
 {
     private readonly SimulationsToExecute _simulationsToExecute;
     private readonly TasksToComplete _tasksToComplete;
-    private readonly ISampler<CompletedTasks> _burndownSampler;
-    private readonly ISampler<AddedTasks> _regressionSampler;
+    private readonly ISampler<Tasks> _burndownSampler;
+    private readonly ISampler<Tasks> _regressionSampler;
     private readonly MaxCycles _maxCycles;
 
     public Experiment(Configuration.Configuration configuration)

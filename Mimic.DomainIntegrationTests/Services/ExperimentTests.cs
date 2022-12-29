@@ -3,7 +3,6 @@ using Mimic.Domain.Experiments;
 using Mimic.Domain.Experiments.Configuration;
 using Mimic.Domain.History;
 using Mimic.Domain.History.Samplers;
-using Mimic.Domain.Tasks;
 using FluentAssertions;
 using Xunit;
 
@@ -21,24 +20,24 @@ public class ExperimentTests
         var burndownHistory = new BurndownHistory();
         burndownHistory.From(new[]
         {
-            new CompletedTasks(1),
-            new CompletedTasks(2),
-            new CompletedTasks(3)
+            new Tasks(1),
+            new Tasks(2),
+            new Tasks(3)
         });
 
         var regressionHistory = new RegressionHistory();
         regressionHistory.From(new[]
         {
-            new AddedTasks(0),
-            new AddedTasks(1),
-            new AddedTasks(0),
+            new Tasks(0),
+            new Tasks(1),
+            new Tasks(0),
         });
 
         var configuration = new Configuration
         {
             TasksToComplete = new TasksToComplete(TasksToComplete),
-            BurndownSampler = new CompletedTasksRandomSampler(burndownHistory),
-            RegressionSampler = new RegressionRandomSampler(regressionHistory),
+            BurndownSampler = new HistoryRandomSampler(burndownHistory),
+            RegressionSampler = new HistoryRandomSampler(regressionHistory),
             SimulationsToExecute = new SimulationsToExecute(SimulationsToExecute),
             MaxCycles = new MaxCycles()
         };
