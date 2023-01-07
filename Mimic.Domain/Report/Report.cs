@@ -2,12 +2,12 @@
 using System.Linq;
 using Mimic.Domain.Abstractions;
 
-namespace Mimic.Domain.Experiments;
+namespace Mimic.Domain.Report;
 
 /// <summary>
 /// The results of an experiment
 /// </summary>
-public class ExperimentResults : IValueObject<IEnumerable<CyclesUsed>>
+public class Report : IValueObject<IEnumerable<CyclesUsed>>
 {
     /// <summary>
     /// The results of the experiment

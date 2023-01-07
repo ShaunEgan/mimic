@@ -1,5 +1,6 @@
 using Mimic.Domain.Experiments;
 using MediatR;
+using Mimic.Domain.Report;
 
 namespace Mimic.Application.Experiments.Commands.RunExperiment;
 
@@ -9,7 +10,7 @@ public record RunExperimentCommand(
     int MaxCycles,
     int[] BurndownHistory,
     RegressionCommand[] CycleRegressions
-) : IRequest<ExperimentResults>;
+) : IRequest<Report>;
 
 public record RegressionCommand(
     int[] Data

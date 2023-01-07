@@ -3,12 +3,13 @@ using Mimic.Domain.Experiments.Configuration;
 using Mimic.Domain.History;
 using Mimic.Domain.History.Samplers;
 using MediatR;
+using Mimic.Domain.Report;
 
 namespace Mimic.Application.Experiments.Commands.RunExperiment;
 
-public class RunExperimentCommandHandler : IRequestHandler<RunExperimentCommand, ExperimentResults>
+public class RunExperimentCommandHandler : IRequestHandler<RunExperimentCommand, Report>
 {
-    public Task<ExperimentResults> Handle(RunExperimentCommand command, CancellationToken cancellationToken)
+    public Task<Report> Handle(RunExperimentCommand command, CancellationToken cancellationToken)
     {
         var burndownHistory = new BurndownHistory();
         burndownHistory.From(command.BurndownHistory.Select(x => new Tasks(x)));

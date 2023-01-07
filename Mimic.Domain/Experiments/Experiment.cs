@@ -25,9 +25,9 @@ public class Experiment
         _maxCycles = configuration.MaxCycles;
     }
 
-    public ExperimentResults Run()
+    public Report.Report Run()
     {
-        var results = new ExperimentResults();
+        var results = new Report.Report();
 
         for (var i = 0; i < _simulationsToExecute.Value(); i++)
         {

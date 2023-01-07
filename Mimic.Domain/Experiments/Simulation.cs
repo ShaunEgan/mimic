@@ -2,6 +2,7 @@
 using Mimic.Domain.Experiments.Configuration;
 using Mimic.Domain.History.Samplers;
 using Mimic.Domain.History;
+using Mimic.Domain.Report;
 
 namespace Mimic.Domain.Experiments;
 

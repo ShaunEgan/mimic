@@ -1,7 +1,7 @@
 ﻿using System;
 using Mimic.Domain.Abstractions;
 
-namespace Mimic.Domain.Experiments;
+namespace Mimic.Domain.Report;
 
 /// <summary>
 /// Represents the number of cycles used to burndown a set of tasks
@@ -38,7 +38,7 @@ public class CyclesUsed : IValueObject<int>, IComparable
     }
 
     /// <summary>
-    /// Used for odering
+    /// Used for ordering
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>

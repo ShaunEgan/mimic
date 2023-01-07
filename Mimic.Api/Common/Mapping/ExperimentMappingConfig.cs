@@ -2,6 +2,7 @@ using Mimic.Application.Experiments.Commands.RunExperiment;
 using Mimic.Contracts.Experiments;
 using Mimic.Domain.Experiments;
 using Mapster;
+using Mimic.Domain.Report;
 
 namespace Mimic.Api.Common.Mapping;
 
@@ -11,14 +12,14 @@ public class ExperimentMappingConfig : IRegister
     {
         config.NewConfig<RunExperimentRequest, RunExperimentCommand>();
 
-        config.NewConfig<ExperimentResults, RunExperimentResponse>()
+        config.NewConfig<Report, RunExperimentResponse>()
             .Map(dest => dest.SimulationResults, src => src.Value().Select(x => x.Value()))
             .Map(dest => dest.ProbabilityBuckets, src => CalculateProbabilityBuckets(src));
     }
 
-    private static int[] CalculateProbabilityBuckets(ExperimentResults experimentResults)
+    private static int[] CalculateProbabilityBuckets(Report report)
     {
-        var simulationResults = experimentResults.Value().Select(x => x.Value()).ToArray();
+        var simulationResults = report.Value().Select(x => x.Value()).ToArray();
         
         const int numberOfBuckets = 20;
         const int bucketSize = 100 / numberOfBuckets;

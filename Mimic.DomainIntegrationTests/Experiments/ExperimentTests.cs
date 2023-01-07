@@ -4,6 +4,7 @@ using Mimic.Domain.Experiments.Configuration;
 using Mimic.Domain.History;
 using Mimic.Domain.History.Samplers;
 using FluentAssertions;
+using Mimic.Domain.Report;
 using Xunit;
 
 namespace Mimic.DomainIntegrationTests.Services;
