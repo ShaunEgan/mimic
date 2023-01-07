@@ -37,7 +37,7 @@ public class ExperimentTests
         {
             TasksToComplete = new TasksToComplete(TasksToComplete),
             BurndownSampler = new HistoryRandomSampler(burndownHistory),
-            RegressionSampler = new HistoryRandomSampler(regressionHistory),
+            RegressionSamplers = new [] { new HistoryRandomSampler(regressionHistory) },
             SimulationsToExecute = new SimulationsToExecute(SimulationsToExecute),
             MaxCycles = new MaxCycles()
         };

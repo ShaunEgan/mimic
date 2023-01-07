@@ -12,15 +12,22 @@ public class RunExperimentCommandHandler : IRequestHandler<RunExperimentCommand,
     {
         var burndownHistory = new BurndownHistory();
         burndownHistory.From(command.BurndownHistory.Select(x => new Tasks(x)));
+        var burndownSampler = new HistoryRandomSampler(burndownHistory);
+        
+        var regressionSamplers = command.CycleRegressions.Select(cycleRegression =>
+        {
+            var regressionHistory = new RegressionHistory();
+            regressionHistory.From(cycleRegression.Data.Select(x => new Tasks(x)));
 
-        var regressionHistory = new RegressionHistory();
-        regressionHistory.From(command.CycleRegressions.First().Data.Select(x => new Tasks(x)));
+            var historyRandomSampler = new HistoryRandomSampler(regressionHistory);
+            return historyRandomSampler;
+        });
 
         var configuration = new Configuration
         {
             TasksToComplete = new TasksToComplete(command.TasksToComplete),
-            BurndownSampler = new HistoryRandomSampler(burndownHistory),
-            RegressionSampler = new HistoryRandomSampler(regressionHistory),
+            BurndownSampler = burndownSampler,
+            RegressionSamplers = regressionSamplers,
             SimulationsToExecute = new SimulationsToExecute(command.SimulationsToExecute),
             MaxCycles = new MaxCycles(command.MaxCycles)
         };

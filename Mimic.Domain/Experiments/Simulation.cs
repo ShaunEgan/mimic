@@ -9,15 +9,15 @@ public class Simulation
 {
     private readonly TasksToComplete _tasksToComplete;
     private readonly ISampler<Tasks> _burndownSampler;
-    private readonly ISampler<Tasks> _regressionSampler;
+    private readonly ISampler<Tasks>[] _regressionSamplers;
     private readonly MaxCycles _maxCycles;
 
     public Simulation(TasksToComplete tasksToComplete, ISampler<Tasks> burndownSampler,
-        ISampler<Tasks> regressionSampler, MaxCycles maxCycles)
+        ISampler<Tasks>[] regressionSamplers, MaxCycles maxCycles)
     {
         _tasksToComplete = tasksToComplete;
         _burndownSampler = burndownSampler;
-        _regressionSampler = regressionSampler;
+        _regressionSamplers = regressionSamplers;
         _maxCycles = maxCycles;
     }
 
@@ -35,8 +35,11 @@ public class Simulation
             var completedTasks = _burndownSampler.NextSample().Value();
             remaining -= completedTasks;
 
-            var regressionTasks = _regressionSampler.NextSample().Value();
-            remaining += regressionTasks;
+            foreach (var regressionSampler in _regressionSamplers)
+            {
+                var regressionTasks = regressionSampler.NextSample().Value();
+                remaining += regressionTasks;
+            }
         }
 
         return new CyclesUsed(cycles);
